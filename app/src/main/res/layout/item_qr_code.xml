@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- QR Code Text -->
+    <TextView
+        android:id="@+id/tv_qr_code_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QR Code Text" />
+
+    <!-- QR Code Scanned/Generated Status -->
+    <TextView
+        android:id="@+id/tv_is_scanned"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scanned/Generated"
+        android:textColor="@android:color/darker_gray" />
+
+</LinearLayout>

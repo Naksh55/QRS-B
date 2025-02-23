@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="20dp"
+    android:background="#F5F5F5"
+    tools:context=".MainActivity">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QR Code Generator and Scanner"
+        android:textColor="#6200EE"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Input Field with CardView -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp">
+
+        <EditText
+            android:id="@+id/et_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:hint="Enter text or URL"
+            android:inputType="text"
+            android:textSize="16sp"
+            android:background="@null" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- Generate Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_generate_qr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Generate QR Code"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="16dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Scan Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_scan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Scan QR Code"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="16dp"
+        android:layout_marginBottom="24dp" />
+
+    <!-- ImageView for QR Code inside CardView -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/qr_card"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        android:visibility="gone"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:id="@+id/iv_qr_code"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="Generated QR Code" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- Share QR Code Button (Placed Below QR Card) -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_share_qr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Share QR Code"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="16dp"
+        android:visibility="gone" /> <!-- Initially hidden -->
+
+    <!-- View History Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_view_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View QR Code History"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="16dp"
+        android:layout_marginTop="10dp" />
+
+</LinearLayout>
