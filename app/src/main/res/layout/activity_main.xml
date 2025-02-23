@@ -76,7 +76,6 @@
             android:layout_height="match_parent"
             android:contentDescription="Generated QR Code" />
     </androidx.cardview.widget.CardView>
-
     <!-- Share QR Code Button (Placed Below QR Card) -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_share_qr"
