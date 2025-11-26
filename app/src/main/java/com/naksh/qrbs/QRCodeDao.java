@@ -2,6 +2,7 @@ package com.naksh.qrbs;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -11,9 +12,12 @@ import java.util.List;
 public interface QRCodeDao {
 
     @Insert
-    void insert(QRCodeEntity qrCodeEntity);
+    void insert(QRCodeEntity entity);
 
-    // Ensure only one method for getting QR code history
-    @Query("SELECT * FROM qr_codes ORDER BY id DESC")
-    LiveData<List<QRCodeEntity>> getAllQRCodeHistory();  // Single definition
+    @Delete
+    void delete(QRCodeEntity entity);
+
+    @Query("SELECT * FROM qr_codes ORDER BY id DESC")  // ✅ Correct table name
+    LiveData<List<QRCodeEntity>> getAllQRCodeHistory();
 }
+

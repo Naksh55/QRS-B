@@ -26,6 +26,10 @@ public class HistoryActivity extends AppCompatActivity {
 
         // Set up the adapter
         qrCodeAdapter = new QRCodeAdapter(this, new ArrayList<>());
+        qrCodeAdapter.setOnDeleteClickListener(entity -> {
+            historyManager.deleteQRCode(entity); // You must implement this
+        });
+
         recyclerView.setAdapter(qrCodeAdapter);
 
         // Observe history changes

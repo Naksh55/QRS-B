@@ -17,11 +17,18 @@ public class QRCodeAdapter extends RecyclerView.Adapter<QRCodeAdapter.QRCodeView
 
     private List<QRCodeEntity> qrCodeHistoryList;
     private Context context;
+    private OnDeleteClickListener deleteClickListener;
+    public interface OnDeleteClickListener {
+        void onDeleteClick(QRCodeEntity entity);
+    }
 
     // Ensure constructor accepts Context and List<QRCodeEntity> properly
     public QRCodeAdapter(Context context, List<QRCodeEntity> qrCodeHistoryList) {
         this.context = context;
         this.qrCodeHistoryList = qrCodeHistoryList;
+    }
+    public void setOnDeleteClickListener(OnDeleteClickListener listener) {
+        this.deleteClickListener = listener;
     }
 
     @NonNull
@@ -38,21 +45,27 @@ public class QRCodeAdapter extends RecyclerView.Adapter<QRCodeAdapter.QRCodeView
         holder.qrCodeTextView.setText(qrCodeEntity.qrText);
         holder.isScannedTextView.setText(qrCodeEntity.isScanned ? "Scanned" : "Generated");
 
-        // Handle click to open URL or show dialog with the content
         holder.itemView.setOnClickListener(v -> {
             String qrContent = qrCodeEntity.qrText;
             if (qrContent.startsWith("http://") || qrContent.startsWith("https://")) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(qrContent));
                 context.startActivity(browserIntent);
             } else {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("QR Code Content")
+                new AlertDialog.Builder(context)
+                        .setTitle("QR Code Content")
                         .setMessage(qrContent)
                         .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
                         .show();
             }
         });
+
+        holder.deleteButton.setOnClickListener(v -> {
+            if (deleteClickListener != null) {
+                deleteClickListener.onDeleteClick(qrCodeEntity);
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {
@@ -68,11 +81,15 @@ public class QRCodeAdapter extends RecyclerView.Adapter<QRCodeAdapter.QRCodeView
     public static class QRCodeViewHolder extends RecyclerView.ViewHolder {
         TextView qrCodeTextView;
         TextView isScannedTextView;
+        TextView deleteButton; // Could also be Button if you used <Button> in XML
+
 
         public QRCodeViewHolder(@NonNull View itemView) {
             super(itemView);
             qrCodeTextView = itemView.findViewById(R.id.tv_qr_code_text);
             isScannedTextView = itemView.findViewById(R.id.tv_is_scanned);
+            deleteButton = itemView.findViewById(R.id.btn_delete);
+
         }
     }
 }

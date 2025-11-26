@@ -28,6 +28,13 @@ public class QRCodeHistoryManager {
             Log.d("QRCodeHistoryManager", "Inserted QR Code: " + qrText); // Log for verification
         }).start();
     }
+    // Delete a QR code entry
+    public void deleteQRCode(QRCodeEntity entity) {
+        new Thread(() -> {
+            qrCodeDao.delete(entity);
+            Log.d("QRCodeHistoryManager", "Deleted QR Code: " + entity.getQrText());
+        }).start();
+    }
 
 
     // Load all QR code history entries
